@@ -1,10 +1,6 @@
 package net.java.cargotracker.interfaces.tracking.web;
 
-import net.java.cargotracker.domain.model.cargo.Cargo;
-import net.java.cargotracker.infrastructure.events.cdi.CargoInspected;
-
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,15 +24,14 @@ public class HandledCargo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private List<Cargo> cargos = new ArrayList<>();
+    private List<String> handledCargos = new ArrayList<>();
 
-
-    public List<Cargo> getCargos(){
-        return cargos;
+    public List<String> getHandledCargos(){
+        return handledCargos;
     }
 
-    public void onCargoInspected(@Observes @CargoInspected Cargo cargo){
-        cargos.add(cargo);
+    public void addHandledCargo(String trackingId){
+        handledCargos.add(trackingId);
     }
 
 }
